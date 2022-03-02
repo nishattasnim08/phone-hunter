@@ -8,7 +8,7 @@ const searchPhone = () => {
 
     fetch(url)
         .then(res => res.json())
-        .then(data => displaySearchResult(data.data));
+        .then(data => displaySearchResult(data.data.slice(0,20)));
 }
 
 // search result display
@@ -58,7 +58,7 @@ const displayPhoneDetail = phone => {
     div.classList.add('card');
     div.innerHTML = `
     <div class="card-body">
-    <img src="${phone.image}" class="w-50 h-75 my-5 mx-auto card-img-top" alt="...">
+    <img src="${phone.image}" class="w-25 h-50 my-5 mx-auto card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${phone.name}</h5>
       <p class="card-text">Storage: ${phone.mainFeatures.storage}</p>
@@ -66,6 +66,7 @@ const displayPhoneDetail = phone => {
       <p class="card-text">Chipset: ${phone.mainFeatures.chipSet}</p>
       <p class="card-text">Memory: ${phone.mainFeatures.memory}</p>
       <p class="card-text">Sensors: ${phone.mainFeatures.sensors.join(' ,')}</p>
+      <p class="card-text">Release Date: ${phone?.releaseDate ? phone.releaseDate : "Release date has not declared"}</p>
     </div>
     `;
     phoneDetails.appendChild(div);
